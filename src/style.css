@@ -43,9 +43,19 @@ a:hover {
 }
 
 .nav-lang.selected {
+    position: relative;
     color: green;
-    border-bottom: 2px solid green;
     font-weight: bold;
+}
+
+.nav-lang.selected::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: green;
 }
 
 .nav-lang.selected:hover {
