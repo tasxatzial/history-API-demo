@@ -7,6 +7,10 @@ h1 {
     text-align: center;
 }
 
+h1.language-title {
+    margin-bottom: 0;
+}
+
 .container {
     display: flex;
     padding: 1em;
@@ -64,4 +68,10 @@ a:hover {
 
 .main {
     width: 80%;
+}
+
+.language-logo {
+    display: block;
+    max-width: 3em;
+    margin: 0 auto;
 }

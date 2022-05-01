@@ -1,7 +1,9 @@
 const nav = document.querySelector('.nav');
 const navLanguages = nav.querySelectorAll('.nav-lang');
 const h1 = document.querySelector('h1');
+const main = document.querySelector('.main');
 const mainBody = document.querySelector('.main-body');
+const languageLogo = document.querySelector('.language-logo');
 
 const states = {
     'index.html': {
@@ -32,8 +34,31 @@ window.addEventListener('popstate', popstate);
 
 function updatePageContent(url) {
     h1.textContent = states[url].name;
+    console.log(main);
     mainBody.textContent = states[url].description;
+    updateLanguageLogo(url);
     updateSelectedLanguage(url);
+}
+
+function updateLanguageLogo(url) {
+    let logo = main.querySelector('.language-logo');
+    if (url === 'index.html') {
+        const logo = main.querySelector('.language-logo');
+        if (logo) {
+            main.removeChild(logo);
+        }
+        h1.classList.remove('language-title');
+    } else {
+        const language = url.split('.')[0];
+        if (!logo) {
+            logo = document.createElement('img');
+            logo.alt = 'language logo';
+            logo.classList.add('language-logo');
+            main.insertBefore(logo, mainBody);
+        }
+        logo.src = 'img/' + language + '.png';
+        h1.classList.add('language-title');
+    }
 }
 
 function updateSelectedLanguage(url) {
