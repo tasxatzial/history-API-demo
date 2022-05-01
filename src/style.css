@@ -1,0 +1,57 @@
+body {
+    line-height: 1.4;
+}
+
+h1 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    padding: 1em;
+    margin: 0 auto;
+    max-width: 50rem;
+    outline: 1px solid black;
+}
+
+a {
+    display: block;
+    margin-bottom: 1em;
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin-right: 2em;
+}
+
+.nav-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.nav-lang {
+    margin-left: 1em;
+}
+
+.nav-lang.selected {
+    color: green;
+    border-bottom: 2px solid green;
+    font-weight: bold;
+}
+
+.nav-lang.selected:hover {
+    text-decoration: none;
+}
+
+.main {
+    width: 80%;
+}
