@@ -1,14 +1,7 @@
-const nav = document.querySelector('.nav');
-const navLanguages = nav.querySelectorAll('.nav-lang');
-const h1 = document.querySelector('h1');
-const main = document.querySelector('.main');
-const mainBody = document.querySelector('.main-body');
-const languageLogo = document.querySelector('.language-logo');
-
 const states = {
     'index.html': {
-        'name': h1.textContent,
-        'description':  mainBody.textContent
+        'name': 'Languages',
+        'description': 'A programming language is any set of rules that converts strings, or graphical program elements in the case of visual programming languages, to various kinds of machine code output. Programming languages are one kind of computer language, and are used in computer programming to implement algorithms.'
     },
     'javascript.html': {
         'name': 'JavaScript',
@@ -27,36 +20,67 @@ const states = {
     }
 };
 
-window.history.replaceState('index.html', '', null);
+let main, h1, mainBody, languageLogo;
+const container = document.querySelector('.container');
+const nav = container.querySelector('.nav');
+const navLanguages = nav.querySelectorAll('.nav-lang');
 
-nav.addEventListener('click', clickNav);
-window.addEventListener('popstate', popstate);
+(function () {
+    let url = window.location.href.split('/').pop();
+    if (!url) {
+        url = 'index.html';
+    }
+    container.appendChild(createMainContent(url));
+    main = document.querySelector('.main');
+    h1 = document.querySelector('h1');
+    mainBody = main.querySelector('.main-body');
+    languageLogo = main.querySelector('.language-logo');
+    updateLanguageLogo(url);
+    updateSelectedLanguage(url);
+    window.addEventListener('popstate', popstate);
+    window.history.replaceState(url, '', null);
+    nav.addEventListener('click', clickNav);
+})();
+
+function createMainContent(url) {
+    const h1 = document.createElement('h1');
+    h1.classList.add('main-title');
+    h1.textContent = states[url].name;
+
+    const p = document.createElement('p');
+    p.classList.add('main-body');
+    p.textContent = states[url].description;
+    
+    const main = document.createElement('div');
+    main.classList.add('main');
+    main.appendChild(h1);
+    main.appendChild(p);
+
+    return main;
+}
 
 function updatePageContent(url) {
     h1.textContent = states[url].name;
-    console.log(main);
     mainBody.textContent = states[url].description;
     updateLanguageLogo(url);
     updateSelectedLanguage(url);
 }
 
 function updateLanguageLogo(url) {
-    let logo = main.querySelector('.language-logo');
+    let languageLogo = main.querySelector('.language-logo');
     if (url === 'index.html') {
-        const logo = main.querySelector('.language-logo');
-        if (logo) {
-            main.removeChild(logo);
+        if (languageLogo) {
+            main.removeChild(languageLogo);
         }
         h1.classList.remove('language-title');
     } else {
-        const language = url.split('.')[0];
-        if (!logo) {
-            logo = document.createElement('img');
-            logo.alt = 'language logo';
-            logo.classList.add('language-logo');
-            main.insertBefore(logo, mainBody);
+        if (!languageLogo) {
+            languageLogo = document.createElement('img');
+            languageLogo.alt = 'language logo';
+            languageLogo.classList.add('language-logo');
+            main.insertBefore(languageLogo, mainBody);
         }
-        logo.src = 'img/' + language + '.png';
+        languageLogo.src = 'img/' + url.split('.')[0] + '.png';
         h1.classList.add('language-title');
     }
 }
