@@ -3,6 +3,10 @@ body {
     line-height: 1.4;
 }
 
+[tabindex="-1"] {
+    outline: none;
+}
+
 h1 {
     margin-top: 0;
     text-align: center;

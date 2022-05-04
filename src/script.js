@@ -45,6 +45,7 @@ const navLanguages = nav.querySelectorAll('.nav-lang');
 function createMainContent(url) {
     const h1 = document.createElement('h1');
     h1.classList.add('main-title');
+    h1.tabIndex = '-1';
     h1.textContent = states[url].name;
 
     const p = document.createElement('p');
@@ -114,6 +115,7 @@ function clickNav(e) {
         e.preventDefault();
         const url = e.target.getAttribute('href').split('/').pop();
         window.history.pushState(url, '', url);
+        h1.focus();
         updatePageContent(url);
         updateWindowTitle(url);
     }
