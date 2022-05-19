@@ -20,58 +20,54 @@ const states = {
     }
 };
 
-let main, h1, mainBody, languageLogo;
-const container = document.querySelector('.container');
-const nav = container.querySelector('.nav');
-const navLanguages = nav.querySelectorAll('.nav-lang');
+let main, mainText, header, h1;
+const nav = document.querySelector('.nav');
+const languageNavLinks = nav.querySelectorAll('.nav-lang');
 
 (function () {
+    createMainContent();
     let url = window.location.href.split('/').pop();
     if (!url) {
         url = 'index.html';
     }
-    container.appendChild(createMainContent(url));
-    main = document.querySelector('.main');
-    h1 = document.querySelector('h1');
-    mainBody = main.querySelector('.main-body');
-    languageLogo = main.querySelector('.language-logo');
-    updateLanguageLogo(url);
-    updateSelectedLanguage(url);
+    updateMainContent(url);
     window.addEventListener('popstate', popstate);
     window.history.replaceState(url, '', null);
     nav.addEventListener('click', clickNav);
 })();
 
-function createMainContent(url) {
-    const h1 = document.createElement('h1');
+function createMainContent() {
+    h1 = document.createElement('h1');
     h1.classList.add('main-title');
-    h1.tabIndex = '-1';
-    h1.textContent = states[url].name;
 
-    const p = document.createElement('p');
-    p.classList.add('main-body');
-    p.textContent = states[url].description;
+    mainText = document.createElement('p');
+    mainText.classList.add('language-info');
     
-    const main = document.createElement('div');
-    main.classList.add('main');
-    main.appendChild(h1);
-    main.appendChild(p);
+    header = document.createElement('header');
+    header.appendChild(h1);
 
-    return main;
+    main = document.createElement('div');
+    main.classList.add('main');
+    main.tabIndex = '-1';
+    main.appendChild(header);
+    main.appendChild(mainText);
+
+    const container = document.querySelector('.container');
+    container.appendChild(main);
 }
 
-function updatePageContent(url) {
+function updateMainContent(url) {
     h1.textContent = states[url].name;
-    mainBody.textContent = states[url].description;
+    mainText.textContent = states[url].description;
     updateLanguageLogo(url);
     updateSelectedLanguage(url);
 }
 
 function updateLanguageLogo(url) {
-    let languageLogo = main.querySelector('.language-logo');
+    let languageLogo = header.querySelector('.language-logo');
     if (url === 'index.html') {
         if (languageLogo) {
-            main.removeChild(languageLogo);
+            header.removeChild(languageLogo);
         }
         h1.classList.remove('language-title');
     } else {
@@ -79,7 +75,7 @@ function updateLanguageLogo(url) {
             languageLogo = document.createElement('img');
             languageLogo.alt = 'language logo';
             languageLogo.classList.add('language-logo');
-            main.insertBefore(languageLogo, mainBody);
+            header.appendChild(languageLogo);
         }
         languageLogo.src = 'img/' + url.split('.')[0] + '.png';
         h1.classList.add('language-title');
@@ -88,15 +84,15 @@ function updateLanguageLogo(url) {
 
 function updateSelectedLanguage(url) {
     if (url === 'index.html') {
-        for (let i = 0; i < navLanguages.length; i++) {
-            navLanguages[i].classList.remove('selected');
+        for (let i = 0; i < languageNavLinks.length; i++) {
+            languageNavLinks[i].classList.remove('selected');
         }
     } else {
-        for (let i = 0; i < navLanguages.length; i++) {
-            if (navLanguages[i].getAttribute('href') === url) {
-                navLanguages[i].classList.add('selected');
+        for (let i = 0; i < languageNavLinks.length; i++) {
+            if (languageNavLinks[i].getAttribute('href') === url) {
+                languageNavLinks[i].classList.add('selected');
             } else {
-                navLanguages[i].classList.remove('selected');
+                languageNavLinks[i].classList.remove('selected');
             }
         }
     }
@@ -115,13 +111,13 @@ function clickNav(e) {
         e.preventDefault();
         const url = e.target.getAttribute('href').split('/').pop();
         window.history.pushState(url, '', url);
-        h1.focus();
-        updatePageContent(url);
+        main.focus();
+        updateMainContent(url);
         updateWindowTitle(url);
     }
     e.stopPropagation();
 }
 
 function popstate(e) {
-    updatePageContent(e.state)
+    updateMainContent(e.state)
 }

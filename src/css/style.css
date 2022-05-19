@@ -41,7 +41,6 @@ a:hover {
 .nav-lang.selected {
     position: relative;
     color: green;
-    font-weight: bold;
 }
 
 .nav-lang.selected::after {
