@@ -107,7 +107,7 @@ function updateWindowTitle(url) {
 }
 
 function clickNav(e) {
-    if (e.target !== e.currentTarget) {
+    if (e.target.classList.contains('nav-link')) {
         e.preventDefault();
         const url = e.target.getAttribute('href').split('/').pop();
         window.history.pushState(url, '', url);
@@ -115,7 +115,6 @@ function clickNav(e) {
         updateMainContent(url);
         updateWindowTitle(url);
     }
-    e.stopPropagation();
 }
 
 function popstate(e) {
