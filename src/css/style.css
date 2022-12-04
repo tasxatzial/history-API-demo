@@ -3,10 +3,6 @@ body {
     line-height: 1.4;
 }
 
-[tabindex="-1"] {
-    outline: none;
-}
-
 /* ------------------ TEXT ------------------ */
 h1 {
     margin-top: 0;
@@ -29,21 +25,21 @@ a:hover {
     text-decoration: underline;
 }
 
-.nav-title {
+.nav-link-home {
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-.nav-lang {
+.nav-link-language {
     margin-left: 1em;
 }
 
-.nav-lang.selected {
+.nav-link-language.selected {
     position: relative;
     color: green;
 }
 
-.nav-lang.selected::after {
+.nav-link-language.selected::after {
     content: '';
     position: absolute;
     top: 100%;
@@ -53,7 +49,7 @@ a:hover {
     background-color: green;
 }
 
-.nav-lang.selected:hover {
+.nav-link-language.selected:hover {
     text-decoration: none;
 }
 
@@ -73,13 +69,14 @@ a:hover {
     outline: 1px solid black;
 }
 
-.nav {
+nav {
     display: flex;
     flex-direction: column;
     width: 20%;
     margin-right: 2em;
 }
 
-.main {
+main {
     width: 80%;
+    outline: none;
 }
