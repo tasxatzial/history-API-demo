@@ -1,8 +1,6 @@
-# History API - demo
+# History API demo
 
-A very simple page demonstrating the use of History API.
-
-See it live [here](https://tasxatzial.github.io/history-API-demo).
+A simple webpage that utilizes the History API.
 
 ## Implementation
 
