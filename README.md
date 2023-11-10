@@ -2,12 +2,17 @@
 
 A simple webpage that utilizes the History API.
 
-## Implementation
+[Live version](https://tasxatzial.github.io/history-API-demo/src/index.html)
 
-* Single Page Application.
-* Back and forward navigation is supported.
-* Loading from a bookmarked location is supported.
+## Features
+
+* Back and forward navigation.
+* Loading from a bookmarked location.
+
+## Dependencies
+
+None. The project uses only HTML, CSS, JavaScript.
 
 ## Run locally
 
-Download the 'src' folder and setup a local web server to serve its contents.
+Download the 'src' folder and use a local web server to serve its contents.
