@@ -2,11 +2,14 @@
 
 A simple webpage that utilizes the History API.
 
-## Implementation
+## Features
 
-* Single Page Application.
-* Back and forward navigation is supported.
-* Loading from a bookmarked location is supported.
+* Back and forward navigation.
+* Loading from a bookmarked location.
+
+## Dependencies
+
+None. The project uses only HTML, CSS, JavaScript.
 
 ## Run locally
 
